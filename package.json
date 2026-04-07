@@ -13,8 +13,14 @@
   },
   "dependencies": {
     "@astrojs/svelte": "^8.0.4",
+    "@tailwindcss/vite": "^4.2.2",
     "astro": "^6.1.4",
     "svelte": "^5.55.1",
+    "tailwindcss": "^4.2.2",
     "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.2",
+    "vite-plugin-svgr": "^5.2.0"
   }
 }
