@@ -1,10 +1,11 @@
 ---
+import Editor from '@/components/Editor.svelte';
 import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Новый пост">
-  <input type="text" placeholder="Title" class="w-full text-4xl font-bold placeholder:text-secondaryText text-text outline-none mb-3" />
+  <input type="text" placeholder="Title" class="w-full text-[2.625rem] font-bold placeholder:text-secondaryText text-text outline-none mb-3" />
   <input type="text" placeholder="Your name" class="w-full text-secondaryText placeholder:text-secondaryText outline-none mb-4" />
   <hr class="border-border mb-6" />
-  <textarea placeholder="Write a new post..." class="w-full h-96 text-xl font-serif max-[920px]:text-lg text-gray-800 outline-none resize-none leading-[1.58]"></textarea>
+  <Editor client:load />
 </Layout>

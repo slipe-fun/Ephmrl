@@ -1,8 +1,9 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Source Serif Pro", serif;
+  --font-serif: "PT Serif", serif;
   --color-background: #ffffff;
   --color-text: #000000;
   --color-primary: #000000;

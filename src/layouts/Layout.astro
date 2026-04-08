@@ -1,7 +1,9 @@
 ---
 import { Icons } from "@/lib/icons";
 import "../styles/global.css";
+import Logo from "../assets/logo.png";
 import { ClientRouter } from "astro:transitions";
+import { Image } from "astro:assets";
 
 interface Props {
   title: string;
@@ -16,8 +18,10 @@ const { title } = Astro.props;
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Source+Serif+Pro:wght@200..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
       rel="stylesheet"
     />
     <meta name="viewport" content="width=device-width" />
@@ -25,69 +29,76 @@ const { title } = Astro.props;
 
     <ClientRouter />
   </head>
+
   <body class="bg-background text-text font-sans min-h-screen flex flex-col">
-    <div
-      class="max-w-5xl mx-auto flex justify-center items-start px-4 w-full flex-1"
-    >
+    <div class="flex-1 max-w-5xl mx-auto flex px-4 w-full">
+      
       <!-- Left Toolbar -->
       <aside
-        class="flex flex-col gap-4 pt-7.5 pr-4"
+        class="flex flex-col gap-4 pt-7.5 pr-4 sticky top-0 h-screen"
         transition:persist="left-toolbar"
       >
-        <button
-          class="size-10 flex items-center justify-center rounded-full font-bold text-lg hover:bg-gray-100"
-          >e.</button
-        >
+        <a href="/" class="hover:opacity-50 duration-150" title="Publication">
+          <Image src={Logo} alt="Logo" class="size-11" />
+        </a>
+
         <div class="w-6 h-px bg-border mx-auto my-1"></div>
-        <button
-          class="size-11 rounded-full cursor-pointer grid place-items-center bg-foreground hover:opacity-50 duration-150 ease-in-out"
-          ><Icons.title class="text-text w-6" /></button
-        >
-        <button
-          class="size-11 rounded-full cursor-pointer grid place-items-center bg-foreground hover:opacity-50 duration-150 ease-in-out"
-          ><Icons.text class="text-text w-6" /></button
-        >
+
+        <button class="size-11 rounded-full grid place-items-center bg-foreground hover:opacity-50">
+          <Icons.title class="text-text w-6" />
+        </button>
+
+        <button class="size-11 rounded-full grid place-items-center bg-foreground hover:opacity-50">
+          <Icons.text class="text-text w-6" />
+        </button>
       </aside>
 
       <!-- Main content -->
-      <main class="flex-1 max-w-3xl pt-6.5 px-4 w-full" transition:animate="fade">
-        <slot />
+      <main
+        class="flex-1 flex flex-col max-w-3xl pt-6.5 px-4 w-full"
+        transition:animate="fade"
+      >
+        <div class="flex-1">
+          <slot />
+        </div>
+
+        <footer
+          class="py-8 text-sm w-full flex justify-center gap-8 text-gray-400"
+          transition:persist="footer"
+        >
+          <a href="#" class="text-secondaryText hover:text-text">
+            Privacy Policy
+          </a>
+          <a href="#" class="text-secondaryText hover:text-text">
+            Terms of Service
+          </a>
+          <a href="#" class="text-secondaryText hover:text-text">
+            API
+          </a>
+          <span class="text-secondaryText">© 2026-2027</span>
+        </footer>
       </main>
 
       <!-- Right Toolbar -->
       <aside
-        class="flex flex-col gap-4 pt-7.5 pl-4"
+        class="flex flex-col gap-4 pt-7.5 pl-4 sticky top-0 h-screen"
         transition:persist="right-toolbar"
       >
         <a
           href="/publications"
-          class="size-11 rounded-full grid place-items-center bg-foreground hover:opacity-50 duration-150 ease-in-out"
-          title="Мои публикации"
+          class="size-11 rounded-full grid place-items-center bg-foreground hover:opacity-50"
         >
           <Icons.grid class="text-text w-6" />
         </a>
-        <button
-          class="size-11 rounded-full cursor-pointer grid place-items-center bg-foreground hover:opacity-50 duration-150 ease-in-out"
-        >
+
+        <button class="size-11 rounded-full grid place-items-center bg-foreground hover:opacity-50">
           <Icons.arrowRight class="text-text w-6" />
         </button>
-        <button
-          class="size-11 rounded-full cursor-pointer grid place-items-center bg-primary hover:opacity-50 duration-150 ease-in-out"
-        >
+
+        <button class="size-11 rounded-full grid place-items-center bg-primary hover:opacity-50">
           <Icons.paperplane class="text-background w-6" />
         </button>
       </aside>
     </div>
-
-    <!-- Footer -->
-    <footer
-      class="py-8 text-center text-sm text-gray-400 flex justify-center gap-8 mt-20"
-      transition:persist="footer"
-    >
-      <a href="#" class="text-secondaryText hover:text-text duration-150 ease-in-out">Privacy Policy</a>
-      <a href="#" class="text-secondaryText hover:text-text duration-150 ease-in-out">Terms of Service</a>
-      <a href="#" class="text-secondaryText hover:text-text duration-150 ease-in-out">API</a>
-      <span class="text-secondaryText">© 2026-2027</span>
-    </footer>
   </body>
 </html>
