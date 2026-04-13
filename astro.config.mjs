@@ -1,8 +1,9 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
-import svelte from '@astrojs/svelte';
-import tailwindcss from '@tailwindcss/vite';
-import path from 'path';
+import { defineConfig } from "astro/config";
+import svelte from "@astrojs/svelte";
+import svg from '@poppanator/sveltekit-svg';
+import tailwindcss from "@tailwindcss/vite";
+import path from "path";
 
 // https://astro.build/config
 export default defineConfig({
@@ -10,7 +11,19 @@ export default defineConfig({
 
   vite: {
     // @ts-ignore
-    plugins: [tailwindcss()],
+    plugins: [
+      tailwindcss(),
+     svg({
+        svgoOptions: {
+          multipass: true,
+          plugins:[
+            { 
+              name: 'preset-default'
+            }
+          ],
+        },
+      }),
+    ],
     resolve: {
       alias: {
         "@": path.resolve("./src"),
@@ -18,5 +31,5 @@ export default defineConfig({
         "@lib": path.resolve("./src/lib"),
       },
     },
-  }
+  },
 });

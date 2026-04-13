@@ -7,5 +7,5 @@ import Layout from '../layouts/Layout.astro';
   <input type="text" placeholder="Title" class="w-full text-[2.625rem] font-bold placeholder:text-secondaryText text-text outline-none mb-3" />
   <input type="text" placeholder="Your name" class="w-full text-secondaryText placeholder:text-secondaryText outline-none mb-4" />
   <hr class="border-border mb-6" />
-  <Editor client:load />
+  <Editor client:only="svelte" />
 </Layout>

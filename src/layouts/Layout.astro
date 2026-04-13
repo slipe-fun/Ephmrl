@@ -3,12 +3,15 @@ import { Icons } from "@/lib/icons";
 import "../styles/global.css";
 import Logo from "../assets/logo.png";
 import { ClientRouter } from "astro:transitions";
-import { Image } from "astro:assets";
+import { getImage, Image } from "astro:assets";
+import LeftToolbar from "@/components/LeftToolbar.svelte";
 
 interface Props {
   title: string;
 }
 const { title } = Astro.props;
+
+const logoUrl = await getImage({ src: Logo, width: 128, format: 'webp' });
 ---
 
 <!doctype html>
@@ -34,24 +37,7 @@ const { title } = Astro.props;
     <div class="flex-1 max-w-5xl mx-auto flex px-4 w-full">
       
       <!-- Left Toolbar -->
-      <aside
-        class="flex flex-col gap-4 pt-7.5 pr-4 sticky top-0 h-screen"
-        transition:persist="left-toolbar"
-      >
-        <a href="/" class="hover:opacity-50 duration-150" title="Publication">
-          <Image src={Logo} alt="Logo" class="size-11" />
-        </a>
-
-        <div class="w-6 h-px bg-border mx-auto my-1"></div>
-
-        <button class="size-11 rounded-full grid place-items-center bg-foreground hover:opacity-50">
-          <Icons.title class="text-text w-6" />
-        </button>
-
-        <button class="size-11 rounded-full grid place-items-center bg-foreground hover:opacity-50">
-          <Icons.text class="text-text w-6" />
-        </button>
-      </aside>
+     <LeftToolbar transition:persist="left-toolbar" client:only="svelte" logo={logoUrl.src} />
 
       <!-- Main content -->
       <main
@@ -86,16 +72,16 @@ const { title } = Astro.props;
       >
         <a
           href="/publications"
-          class="size-11 rounded-full grid place-items-center bg-foreground hover:opacity-50"
+          class="size-11 rounded-full grid place-items-center bg-foreground hover:opacity-50 duration-150 ease-in-out"
         >
           <Icons.grid class="text-text w-6" />
         </a>
 
-        <button class="size-11 rounded-full grid place-items-center bg-foreground hover:opacity-50">
+        <button class="size-11 rounded-full grid place-items-center bg-foreground hover:opacity-50 duration-150 ease-in-out cursor-pointer">
           <Icons.arrowRight class="text-text w-6" />
         </button>
 
-        <button class="size-11 rounded-full grid place-items-center bg-primary hover:opacity-50">
+        <button class="size-11 rounded-full grid place-items-center bg-primary hover:opacity-50 duration-150 ease-in-out cursor-pointer">
           <Icons.paperplane class="text-background w-6" />
         </button>
       </aside>
